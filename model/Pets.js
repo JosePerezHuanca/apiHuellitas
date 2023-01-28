@@ -3,19 +3,58 @@ const db=require('./db');
 
 
 const petSchema=mongoose.Schema({
-nombre: String,
-tipo: String,
-edad: Number,
-cantidad: String,
-sexo: String,
-castrado: Boolean,
-condicion: Boolean,
-condicionDescripcion: String,
-imagen: String,
-duenio: String,
-email: String,
-localidad: String,
-comentarios: String
+nombre:{
+    type: String,
+    required: true
+},
+tipo:{
+    type: String,
+    required: true
+},
+edad:{
+    type: Number,
+    required: true
+},
+cantidad:{
+    type: String,
+    required: true
+},
+sexo:{
+    type: String,
+    required: true
+},
+castrado:{
+    type: Boolean,
+    default: false
+},
+condicion:{
+    type: Boolean,
+    default: false
+},
+condicionDescripcion:{
+    type: String,
+    required: false
+},
+imagen:{
+    type: String,
+    required: true
+},
+duenio:{
+    type: String,
+    required: true
+},
+email:{
+    type: String,
+    required: true
+},
+localidad:{
+    type: String,
+    required: true
+},
+comentarios:{
+    type: String,
+    required: false
+}
 });
 
 const PetModel=mongoose.model('pets',petSchema);

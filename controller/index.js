@@ -1,42 +1,68 @@
 const model=require('../model/Pets');
 const fs=require('fs');
+const {validationResult}=require('express-validator');
 
 const readAll=async(req,res)=>{
     let pets= await model.getPets();
-    res.json(pets);
+    if(pets){
+        res.json(pets);
+    }
+    else{
+        res.status(404).send('El recurso no existe');
+    }
 }
-
 const read=async(req,res)=>{
 let id=req.params.id;
 let pet=await model.getPet(id);
-res.json(pet);
+if(pet){
+    res.json(pet);
 }
-
+else{
+    res.status(404).send('El recurso no existe');
+}
+}
 
 const create=async(req,res)=>{
     let petObj=req.body;
-    petObj.imagen='public/uploads/'+req.file.filename;
-await model.create(petObj);
-res.send('creado');
+    petObj.imagen='https://grupohuellitas.glitch.me/uploads/'+req.file.filename;
+let errors=validationResult(req);
+if(!errors.isEmpty()){
+    return res.send(errors.array());
 }
+await model.create(petObj);
+res.send('ok');
+}
+
 
 const update=async(req,res)=>{
 let id=req.params.id;
 let petObj=req.body;
 let file= await model.getFile(id);
-fs.unlink('./'+file.imagen,(error)=>{
+let arrayString=Array.from(file.imagen);
+arrayString.slice(41);
+let stringFile=arrayString.join("");
+fs.unlink   ('./public/uploads/'+ stringFile,(error)=>{
 if(error){
     throw error;    
 }
 });
-await model.update(id,petObj);
-res.send('ok');
+let errors=validationResult(req);
+if(!errors.isEmpty()){
+    return res.send(errors.array());
+}
+else{
+    await model.update(id,petObj);
+    res.send('ok');
+}
 }
 
 const remove=async(req,res)=>{
 let id=req.params.id;
 let file=await model.getFile(id);
-fs.unlink('./'+ file.imagen, (error)=>{
+let arrayString=Array.from(file.imagen);
+let stringFile=arrayString.slice(41);
+let stringFileResult=stringFile.join("");
+fs.unlink('./public/uploads/'+ stringFileResult, (error)=>{
     if(error){
         throw error;
     }
@@ -45,4 +71,4 @@ await model.remove(id);
 res.send('ok');
 }
 
-module.exports={create,readAll,read,update,remove};
+module.exports={create,read,readAll,update,remove};

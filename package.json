@@ -5,23 +5,27 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon main.js"
+    "start": "node main.js"
+  },
+  "engines": {
+    "node": "16.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JosePerezHuanca/apiHuellitas.git"
+    "url": "git+https://github.com/SantiagoLmartinez/pr01_g2_Pescar2022.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/SantiagoLmartinez/pr01_g2_Pescar2022/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/SantiagoLmartinez/pr01_g2_Pescar2022#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.1",
+    "express-validator": "^6.14.2",
     "mongoose": "^6.6.1",
     "morgan": "^1.10.0",
-    "multer": "^1.4.5-lts.1",
-    "nodemon": "^2.0.20"
+    "multer": "^1.4.5-lts.1"
   }
 }
