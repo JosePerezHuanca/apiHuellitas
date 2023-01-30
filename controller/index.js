@@ -37,8 +37,8 @@ res.send('ok');
 const update=async(req,res)=>{
 let id=req.params.id;
 let petObj=req.body;
-let file= await model.getFile(id);
-let arrayString=Array.from(file.imagen);
+let file=petObj.imagen
+let arrayString=Array.from(file);
 let fileString=arrayString.slice(41);
 let stringResult=fileString.join("");
 let errors=validationResult(req);
