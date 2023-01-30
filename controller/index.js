@@ -38,7 +38,7 @@ const update=async(req,res)=>{
 let id=req.params.id;
 let petObj=req.body;
 petObj.imagen='https://grupohuellitas.glitch.me/uploads/'+req.file.filename;
-let file=petObj.imagen
+let file=model.getFile(id);
 let arrayString=Array.from(file);
 let fileString=arrayString.slice(41);
 let stringResult=fileString.join("");
