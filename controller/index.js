@@ -37,7 +37,7 @@ res.send('ok');
 const update=async(req,res)=>{
 let id=req.params.id;
 let petObj=req.body;
-petObj.imagen='https://grupohuellitas.glitch.me'+req.file.filename;
+petObj.imagen='https://grupohuellitas.glitch.me/'+req.file.filename;
 let file=petObj.imagen
 let arrayString=Array.from(file);
 let fileString=arrayString.slice(41);
@@ -46,7 +46,6 @@ let errors=validationResult(req);
 if(!errors.isEmpty()){
     return res.send(errors.array());
 }
-else{
     fs.unlink   ('./public/uploads/'+ stringResult,(error)=>{
         if(error){
             throw error;    
@@ -54,7 +53,6 @@ else{
     });
     await model.update(id,petObj);
     res.send('ok');
-}
 }
 
 const remove=async(req,res)=>{
