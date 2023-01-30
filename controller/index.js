@@ -39,18 +39,18 @@ let id=req.params.id;
 let petObj=req.body;
 let file= await model.getFile(id);
 let arrayString=Array.from(file.imagen);
-arrayString.slice(41);
-let stringFile=arrayString.join("");
-fs.unlink   ('./public/uploads/'+ stringFile,(error)=>{
-if(error){
-    throw error;    
-}
-});
+let fileString=arrayString.slice(41);
+let stringResult=fileString.join("");
 let errors=validationResult(req);
 if(!errors.isEmpty()){
     return res.send(errors.array());
 }
 else{
+    fs.unlink   ('./public/uploads/'+ stringResult,(error)=>{
+        if(error){
+            throw error;    
+        }
+    });
     await model.update(id,petObj);
     res.send('ok');
 }
