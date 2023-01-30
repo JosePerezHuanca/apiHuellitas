@@ -39,14 +39,14 @@ let id=req.params.id;
 let petObj=req.body;
 petObj.imagen='https://grupohuellitas.glitch.me/uploads/'+req.file.filename;
 let file=await model.getFile(id);
-let arrayString=Array.from(file);
+let arrayString=Array.from(file.imagen);
 let fileString=arrayString.slice(41);
 let stringResult=fileString.join("");
 let errors=validationResult(req);
 if(!errors.isEmpty()){
     return res.send(errors.array());
 }
-    fs.unlink   ('./public/uploads/'+ stringResult,(error)=>{
+    fs.unlink('./public/uploads/'+ stringResult,(error)=>{
         if(error){
             throw error;    
         }
