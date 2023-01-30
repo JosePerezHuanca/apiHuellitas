@@ -37,6 +37,7 @@ res.send('ok');
 const update=async(req,res)=>{
 let id=req.params.id;
 let petObj=req.body;
+petObj.imagen='https://grupohuellitas.glitch.me'
 let file=petObj.imagen
 let arrayString=Array.from(file);
 let fileString=arrayString.slice(41);
